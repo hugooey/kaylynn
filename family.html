@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎨 Draw & Dress-Up Game</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      background-color: #fff0f5;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+    }
+    h1 {
+      color: #ff69b4;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    .game-area {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+    .canvas-container {
+      position: relative;
+      border: 2px dashed #ffb6c1;
+      padding: 10px;
+      border-radius: 10px;
+    }
+    canvas {
+      border: 1px solid #ffb6c1;
+      background-color: #ffffff;
+      border-radius: 10px;
+    }
+    .tools-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 30px;
+    }
+    .tool-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    button, select, input[type="color"] {
+      padding: 12px 20px;
+      font-size: 1rem;
+      background-color: #ffb6c1;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    button:hover, select:hover, input[type="color"]:hover {
+      background-color: #ff69b4;
+      color: white;
+    }
+    button:focus {
+      outline: none;
+    }
+    .back-button {
+      background-color: #ff69b4;
+      color: white;
+      padding: 12px 24px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+    .back-button:hover {
+      background-color: #ff1493;
+    }
+    .screenshot-container {
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎨 Draw & Dress-Up Game</h1>
+  <p>Draw your character and have fun with drawing tools!</p>
+
+  <!-- Game Area with Canvas -->
+  <div class="game-area">
+    <div class="canvas-container">
+      <canvas id="drawCanvas" width="300" height="400"></canvas>
+    </div>
+  </div>
+
+  <!-- Tools Section -->
+  <div class="tools-container">
+    <div class="tool-item">
+      <button onclick="changeTool('pen')">✏️ Pen Tool</button>
+    </div>
+    <div class="tool-item">
+      <button onclick="changeTool('eraser')">🧼 Eraser Tool</button>
+    </div>
+    <div class="tool-item">
+      <label for="colorPicker">Pick Color:</label>
+      <input type="color" id="colorPicker" onchange="changeColor(event)">
+    </div>
+  </div>
+
+  <!-- Screenshot Button Section -->
+  <div class="screenshot-container">
+    <button onclick="takeScreenshot()">📸 Take Screenshot</button>
+  </div>
+
+  <!-- Back Button -->
+  <div class="button-container">
+    <a href="home.html">
+      <button class="back-button">Go to Home</button>
+    </a>
+  </div>
+
+  <script>
+    // Canvas Drawing Logic
+    const canvas = document.getElementById("drawCanvas");
+    const ctx = canvas.getContext("2d");
+
+    let drawing = false;
+    let tool = 'pen';  // Pen or eraser
+    let color = '#000000';  // Default color
+
+    // Start Drawing
+    canvas.addEventListener('mousedown', (e) => {
+      drawing = true;
+      ctx.beginPath();
+      ctx.moveTo(e.offsetX, e.offsetY);
+    });
+
+    // Draw or Erase
+    canvas.addEventListener('mousemove', (e) => {
+      if (!drawing) return;
+      if (tool === 'pen') {
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 3;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+      } else if (tool === 'eraser') {
+        ctx.clearRect(e.offsetX - 15, e.offsetY - 15, 30, 30);
+      }
+    });
+
+    // Stop Drawing
+    canvas.addEventListener('mouseup', () => {
+      drawing = false;
+    });
+
+    // Clear the canvas
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // Change tool (pen or eraser)
+    function changeTool(selectedTool) {
+      tool = selectedTool;
+    }
+
+    // Change pen color
+    function changeColor(event) {
+      color = event.target.value;
+    }
+
+    // Take Screenshot
+    function takeScreenshot() {
+      html2canvas(canvas).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "drawing-character.png";
+        link.href = canvas.toDataURL();
+        link.click();
+      });
+    }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
+</html>

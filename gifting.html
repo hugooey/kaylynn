@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎁 Gift Wrap Showdown!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to bottom, #fff0f5, #e0ffff);
+      font-family: 'Patrick Hand', cursive;
+      text-align: center;
+      padding: 30px;
+    }
+
+    h1 {
+      color: #ff3c92;
+      font-size: 2.5em;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .game-area {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .items {
+      display: flex;
+      gap: 25px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .item {
+      width: 90px;
+      height: 90px;
+      border-radius: 12px;
+      background-color: #fff0f5;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      cursor: grab;
+      font-size: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+
+    .item:active {
+      transform: scale(1.2);
+    }
+
+    .gift-box {
+      width: 160px;
+      height: 160px;
+      border: 2px dashed #ccc;
+      border-radius: 18px;
+      background-color: #ffe0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .dropped {
+      position: absolute;
+      animation: pop 0.4s ease;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    #timer {
+      margin-top: 15px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ff69b4;
+    }
+
+    .danger {
+      color: red;
+      animation: shake 0.5s infinite alternate;
+    }
+
+    @keyframes shake {
+      from { transform: rotate(-2deg); }
+      to { transform: rotate(2deg); }
+    }
+
+    .success {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      color: #32cd32;
+      font-weight: bold;
+    }
+
+    .controls {
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 15px;
+      margin: 5px;
+      background-color: #ffb6c1;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #ff69b4;
+    }
+
+    #levelDisplay {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎁 Gift Wrap Showdown!</h1>
+  <p>Wrap all the items before time runs out!</p>
+  <div id="levelDisplay">Level: 1</div>
+  <div id="timer">⏳ Time: 10s</div>
+
+  <div class="game-area">
+    <div class="items" id="itemsRow"></div>
+    <div class="gift-box" id="giftBox">🎁</div>
+    <div class="success" id="successMessage"></div>
+
+    <div class="controls">
+      <button onclick="resetGame()">🔁 Reset Game</button>
+      <button onclick="goHome()">🏠 Go to Home</button>
+    </div>
+  </div>
+
+  <script>
+    const allItems = {
+      wrap: "🧻",
+      bow: "🎀",
+      tag: "🏷️",
+      teddy: "🧸",
+      box: "📦"
+    };
+
+    const levelConfigs = {
+      1: ["wrap"],
+      2: ["wrap", "bow"],
+      3: ["wrap", "bow", "tag"],
+      4: ["wrap", "bow", "tag", "teddy"],
+      5: ["wrap", "bow", "tag", "teddy", "box"]
+    };
+
+    let currentLevel = 1;
+    let droppedItems = [];
+    let levelItems = [];
+    let timer;
+    let timeLeft = 10;
+    let gameOver = false;
+
+    const giftBox = document.getElementById("giftBox");
+    const itemsRow = document.getElementById("itemsRow");
+    const successMessage = document.getElementById("successMessage");
+    const timerDisplay = document.getElementById("timer");
+    const levelDisplay = document.getElementById("levelDisplay");
+
+    function setupLevel(level) {
+      droppedItems = [];
+      giftBox.innerHTML = "🎁";
+      successMessage.textContent = "";
+      giftBox.style.transform = "scale(1)";
+      giftBox.querySelectorAll(".dropped").forEach(el => el.remove());
+      itemsRow.innerHTML = "";
+
+      if (!levelConfigs[level]) {
+        successMessage.textContent = "🏆 YOU WIN! All gifts wrapped!";
+        clearInterval(timer);
+        return;
+      }
+
+      levelItems = levelConfigs[level];
+
+      levelItems.forEach(id => {
+        const item = document.createElement("div");
+        item.className = "item";
+        item.id = id;
+        item.textContent = allItems[id];
+        item.setAttribute("draggable", "true");
+        item.addEventListener("dragstart", dragStart);
+        itemsRow.appendChild(item);
+      });
+
+      levelDisplay.textContent = `Level: ${level}`;
+    }
+
+    function dragStart(e) {
+      e.dataTransfer.setData("text", e.target.id);
+    }
+
+    giftBox.addEventListener("dragover", (e) => e.preventDefault());
+    giftBox.addEventListener("drop", dropItem);
+
+    function dropItem(e) {
+      if (gameOver) return;
+
+      const id = e.dataTransfer.getData("text");
+      if (!droppedItems.includes(id) && levelItems.includes(id)) {
+        const dropped = document.createElement("div");
+        dropped.className = "dropped";
+        dropped.textContent = allItems[id];
+        dropped.style.top = `${Math.random() * 90}px`;
+        dropped.style.left = `${Math.random() * 90}px`;
+        giftBox.appendChild(dropped);
+        droppedItems.push(id);
+
+        if (droppedItems.length === levelItems.length) {
+          successMessage.textContent = `🎉 Level ${currentLevel} Complete!`;
+          giftBox.style.transform = "scale(1.1) rotate(2deg)";
+          setTimeout(() => {
+            currentLevel++;
+            setupLevel(currentLevel);
+          }, 1000);
+        }
+      }
+    }
+
+    function startGlobalTimer() {
+      timeLeft = 12;
+      timerDisplay.textContent = `⏳ Time: ${timeLeft}s`;
+      timer = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = `⏳ Time: ${timeLeft}s`;
+        if (timeLeft <= 5) {
+          timerDisplay.classList.add("danger");
+        }
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          gameOver = true;
+          successMessage.textContent = "⏰ Time’s up! Try again.";
+        }
+      }, 1000);
+    }
+
+    function resetGame() {
+      clearInterval(timer);
+      gameOver = false;
+      currentLevel = 1;
+      timerDisplay.classList.remove("danger");
+      startGlobalTimer();
+      setupLevel(currentLevel);
+    }
+
+    function goHome() {
+      window.location.href = "home.html"; // Change this path if needed
+    }
+
+    // Start game initially
+    resetGame();
+  </script>
+
+</body>
+</html>

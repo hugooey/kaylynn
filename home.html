@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kaylynn's Cozy World ✨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Segoe+UI&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Quicksand', 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #fff5fc, #fcefff);
+      margin: 0;
+      padding: 0;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 3rem 1rem 1rem;
+      background-color: #fefefe;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      color: #7a6c5d;
+    }
+
+    header p {
+      font-style: italic;
+      color: #888;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      transition: transform 0.3s, background-color 0.3s;
+      cursor: pointer;
+      text-align: center;
+      position: relative;
+      z-index: 5;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      background-color: #f0f8ff;
+    }
+
+    .card h3 {
+      margin-top: 0.5rem;
+      color: #5a5a5a;
+    }
+
+    .emoji {
+      font-size: 2rem;
+    }
+
+    .message {
+      max-width: 600px;
+      margin: 2rem auto 3rem;
+      padding: 1.2rem 1.5rem;
+      background: #fff0f7;
+      border: 2px dashed #ffc0cb;
+      border-radius: 20px;
+      box-shadow: 0 6px 15px rgba(255, 192, 203, 0.3);
+      text-align: center;
+      font-size: 1.2rem;
+      color: #5a4b44;
+      display: none;
+      z-index: 10;
+      position: relative;
+      animation: popIn 0.4s ease;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #777;
+      background-color: #fff;
+      z-index: 5;
+      position: relative;
+    }
+
+    .milk-tea {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .flower {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYb3FPELq_IQqXug6rRqLkhXH2gh4Uy4IDeg&s');
+      background-size: cover;
+      animation: floatDown 10s linear infinite;
+      cursor: grab;
+      z-index: 1;
+    }
+
+    @keyframes floatDown {
+      0% {
+        transform: translateY(-60px) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .special-card {
+      background: linear-gradient(145deg, #fff0f5, #e0f7ff);
+      border: 2px dashed #ffc0cb;
+      box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3);
+      animation: pulseGlow 2.5s ease-in-out infinite;
+      font-weight: bold;
+      color: #5a4b44;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 15px rgba(255, 192, 203, 0.6);
+      }
+      50% {
+        box-shadow: 0 0 25px rgba(173, 216, 230, 0.8);
+      }
+    }
+
+    #sunghoonPopup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+      z-index: 1000;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    #sunghoonPopup img {
+      width: 300px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🌸 Welcome to Kaylynn's Cozy World 🌸</h1>
+    <p>Click on something to feel the joy you love 💖</p>
+  </header>
+
+  <div class="grid">
+    <div class="card" onclick="window.location.href='music.html'; showMessage('Listening to Wave to Earth... 🎧'); scrollToMessage()">
+      <div class="emoji">🎶</div>
+      <h3>Music Vibes</h3>
+    </div>
+
+    <div class="card" onclick="window.location.href='math.html'; showMessage('Math is beautiful 💡📐'); scrollToMessage()">
+      <div class="emoji">➗</div>
+      <h3>Math Magic</h3>
+    </div>
+
+    <div class="card" onclick="window.location.href='family.html'; showMessage('Time with loved ones = best time 🥰'); scrollToMessage()">
+      <div class="emoji">👨‍👩‍👧‍👦</div>
+      <h3>Family & Friends</h3>
+    </div>
+
+    <div class="card" onclick="window.location.href='gifting.html'; showMessage('Giving gifts, making smiles 🎁'); scrollToMessage()">
+      <div class="emoji">🎁</div>
+      <h3>Gifting Joy</h3>
+    </div>
+
+    <div class="card" onclick="window.location.href='map.html'; showMessage('Exploring the world one trip at a time ✈️'); scrollToMessage()">
+      <div class="emoji">🌍</div>
+      <h3>Travel Adventures</h3>
+    </div>
+
+    <div class="card" onclick="window.location.href='animals.html'; showMessage('Penguins & Bears are the cutest 🐧🐻'); scrollToMessage()">
+      <div class="emoji">🐧🐻</div>
+      <h3>Animal Love</h3>
+    </div>
+
+    <!-- Yummy Snacks -->
+    <div class="card milk-tea" onclick="showMessage('Craving milk tea, toast & fish n chips! 🧋🍞🐟'); scrollToMessage()">
+      <div class="emoji">🧋</div>
+      <h3>Yummy Snacks</h3>
+    </div>
+
+    <!-- Pretty Things -->
+    <div class="card" onclick="showMessage('Roses, Carnations, Ribbons & Hugo 🌹🎀'); scrollToMessage()">
+      <div class="emoji">🌸</div>
+      <h3>Pretty Things</h3>
+    </div>
+
+    <div class="card special-card" onclick="window.location.href='encouragement.html'; showEncouragement()">
+      <div class="emoji">🌟</div>
+      <h3>Click for Encouragement!</h3>
+    </div>
+  </div>
+
+  <div class="message" id="messageBox">✨</div>
+
+  <footer>
+    Made by your one and only investment and shit 🤍
+  </footer>
+
+  <div id="sunghoonPopup">
+    <img src="https://i.pinimg.com/736x/69/70/34/69703445842c444c6c3454931cfa773d.jpg" alt="Sunghoon Jumpscare" />
+  </div>
+
+  <script>
+    function showMessage(msg) {
+      const box = document.getElementById("messageBox");
+      box.innerText = msg;
+      box.style.display = "block";
+    }
+
+    function scrollToMessage() {
+      const messageBox = document.getElementById("messageBox");
+      window.scrollTo({ top: messageBox.offsetTop, behavior: "smooth" });
+    }
+
+    function showEncouragement() {
+      const messages = [
+        "Hey. just a lil reminder that being tired doesn’t mean you’re weak. it just means you’re human. and honestly? you are doing amazing! 🌿✨",
+        "You don’t have to have it all figured out. no one actually does. we’re all just out here trying to keep snacks in the house and stay sane. 🍫😅",
+        "You’ve been carrying a lot quietly. I see it. and I’m proud of how you still show up—even if it’s just to brush your teeth and go back to bed. 💧🛏️",
+        "Healing’s not linear and neither are you. you’re allowed to feel off. your softness doesn’t need explaining. 🌙🩷",
+        "You are not too much. your heart is just deep. people who get it, get it. and I do. 🫶🏽🌊",
+        "Rest if you need to. disappear if you need to. but don’t doubt that you matter to people even in the quiet. 🕯️🤍",
+        "You’re not lost. you’re just in the middle of becoming. and girl… that’s sacred work. 🐛➡️🦋",
+        "Whatever you’re carrying today—you don’t have to carry it alone. I got hands too. 🤝💛",
+        "You’ve survived every single day you thought you wouldn’t. that makes you powerful in ways you probably don’t even realize yet. 🛡️🔥",
+        "You’re doing better than you think. the fact that you care this much already says everything about you. 💖🧠",
+        "Low days happen. but you? you’re still worthy on the messy days. especially on the messy days. 🧸🩹",
+        "Even when you feel like a puddle of mushy feelings, you’re still golden. still glowing. still loved. 🌧️✨💛"
+      ];
+
+      const box = document.getElementById("messageBox");
+      const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+      box.innerText = randomMsg;
+      box.style.display = "block";
+    }
+
+    // Random Sunghoon popup jumpscare
+    setTimeout(() => {
+      const popup = document.getElementById("sunghoonPopup");
+      popup.style.display = "block";
+      popup.style.opacity = "1";
+      popup.style.transform = "translate(-50%, -50%) scale(1.2)";
+
+      setTimeout(() => {
+        popup.style.transform = "translate(-50%, -50%) scale(0.8)";
+        popup.style.opacity = "0";
+      }, 1500);
+
+      setTimeout(() => {
+        popup.style.display = "none";
+      }, 2000);
+    }, Math.random() * 3000 + 2000); // random time between 5s and 20s
+
+    // Add 10 floating flowers
+    for (let i = 0; i < 10; i++) {
+      const flower = document.createElement('div');
+      flower.classList.add('flower');
+      flower.style.left = Math.random() * 90 + 'vw';
+      flower.style.animationDuration = (6 + Math.random() * 5) + 's';
+      flower.style.top = -50 + 'px';
+      document.body.appendChild(flower);
+
+      flower.addEventListener('mousedown', dragStart);
+      flower.addEventListener('touchstart', dragStart, { passive: false });
+
+      function dragStart(e) {
+        e.preventDefault();
+        let shiftX = (e.clientX || e.touches[0].clientX) - flower.getBoundingClientRect().left;
+        let shiftY = (e.clientY || e.touches[0].clientY) - flower.getBoundingClientRect().top;
+
+        function moveAt(x, y) {
+          flower.style.left = x - shiftX + 'px';
+          flower.style.top = y - shiftY + 'px';
+        }
+
+        function onMouseMove(e) {
+          moveAt(e.clientX || e.touches[0].clientX, e.clientY || e.touches[0].clientY);
+        }
+
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('touchmove', onMouseMove);
+
+        flower.onmouseup = flower.ontouchend = function() {
+          document.removeEventListener('mousemove', onMouseMove);
+          document.removeEventListener('touchmove', onMouseMove);
+          flower.onmouseup = flower.ontouchend = null;
+        };
+      }
+    }
+  </script>
+</body>
+</html>
