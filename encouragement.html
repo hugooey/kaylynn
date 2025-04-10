@@ -32,6 +32,12 @@
       animation: fadeIn 0.6s ease-out;
     }
 
+    .msg img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
+
     .button-group {
       display: flex;
       justify-content: center;
@@ -78,21 +84,40 @@
 
   <script>
     const messages = [
-      "Im really grateful that im your friend and I cant tell you how much your words and presence actually mean to me 🌈",
-      "Life does get tough sometimes but your words are a great reminder that its ok to feel sad and take breaks when needed and the same goes for you!  💤",
-      "Your jokes and positivity has always brighten my day even if its just seeing a notififcation pop up from you 🌱",
-      "Dont let one tough experience define you. People mess up  all the time, and the important part is learning from it 💗",
-      "If you ever need someone to listen, hype you up or just chill with, im always here kinda (virtually). I'll always have your support sometimes (kidding) 🌸",
-      "Its ok if things didnt go the way you expected. Sometimes people react in ways we dont fully understand, and that’s on them, not you 💛 ",
-      "If it makes you feel any better just so you know at least sunghoon is lucky to be born in the same generation as you (i dmed him) ✨",
-      "Your strength might waver, but my support never will 💪",
-      "There will always be people who care about you, dont let overthinking steal your peace 💞🧠",
-      "Someone out there sees your worth even when you don’t 💭"
-    ];
+  { text: null, img: "https://media-hosting.imagekit.io/f92a7ed485b640de/WhatsApp%20Image%202025-04-10%20at%2018.00.22_5692f91c.jpg?Expires=1838887385&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=N1crYw5lCtfT8y6u2-ZO9YHQlAAGpIWo82zeBS35SejWZ70TmHWtGYFutgVweSvztMQijGBbPiM3arVXuVuHYqTwzortC1cZjiIBfMl2X~W8Zo5kUNHl9yFHnOxfRGE10lID8qq355HcO620W0b7xyH-BKJ4UsXxCsBkAFbVfnJG7o5aJBV9~Vf5t3AMITpC0qd-4724rbfWAmb6yJuP5qNT6F4x9iLdsAL9UsDcFDPkmYSkQhMFLN~rc6x1Acoa6-9w8PpM4D6DY0mQm9qwuNJgseNGX8RxTPUKy16LpuvL3agTCLGGRvp8JKQYWtnlH-J92Img9DxR7BXrH8L7tw__" },
+  { text: null, img: "https://media-hosting.imagekit.io/1a248f8839314cad/WhatsApp%20Image%202025-04-10%20at%2018.00.21_a6d6670b.jpg?Expires=1838887385&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=IP5OHYfN5YxLMYcYJSyth~5TWv7HXjkhI~s1jxqhDFZ6zwbfRNFOxeg1fnqlnALuZO2XnQJLtgw32TCmIvp7Nev~vGYszGqJgmNTkSptqThzs9GxhDy8MFDtzwGfgaNc6IDYdY3CJ8vzti4BYXUua6ksPMRbjk6Z6Uqae9am~89pY-r6-FGax6dNMwDh0Bj0aRJR1eR1~bjQKvRRCBCSO1Vv50DtFFxSM-VACkjXU~-KXdfqlY8fvi5VjqvJrl8GVGL7FS73C5U6RHxJdsZpkW--iBINLVJbA3jdRGezz5yWvheAOXQstRgqks4yxIVDpghq4KHbnMSOjwBwnU-JDA__" },
+  { text: null, img: "https://media-hosting.imagekit.io/5e0d82a16e37449e/WhatsApp%20Image%202025-04-10%20at%2018.00.21_0da1712a.jpg?Expires=1838887385&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=LiEszUsw94bU76GRcWjtvi5GJKC8SWnu34qQxlu4~k497m1frqKY7xBF3aeTZg9NnUPO4k4IRG0279FI40ZA5Mmb~1PhgRB2swOBqmKrZxSFjF8NPhkKMYurah9XtHJP0tNah~D2iTBqVEeN7O3T96nKzPDMo5bQru5DyVuwKTPNO2T2lQzO2-fWTZ67oE4UR9AiinSfRwicNguQvX8Oeivk70l3V5dRyIX6pFubg10RHJ4wzZaJEFBMpwYX28X2WCj7SEAFz6yjL0T0dvmx-XbdLLqi~Ajb5V4pqjtDiF7cs5B5vXSm4W9G~oeq7fRtb144m7NThYs4Oove7qCYcQ__" },
+  { text: null, img: "https://media-hosting.imagekit.io/582f6ed2199a49f6/WhatsApp%20Image%202025-04-10%20at%2018.00.20_b57e177a.jpg?Expires=1838887385&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jN1YKvDTNjRQCsAyELy~9xb9cVdb~8RjN0qJdVoHnqi~rORK6TPXx5wPuOo70yjGulO8utBtmAWrvJNihPx2lYX62WBKxbGVd8hTMkgL2NEkIjQ28aI9If2Zp3kXNX3f7Bi3hbRJDdmgykYr0ow0Gc8YKq4I56jCrQuAC4FSFLjelqB8GgFoGvoD2l9o3OIvcktnS4T9oymHrqhmAX1rq6naML1Um5hAwJ~sD9uGBN-dktFz~dLZLUWsFoCcyZxsPRNtOO0ra9eudcyNnmQiRkM4NHtEUEe5afSBcPptNmqh~5u29hOIxFC5G7TTNgx~63tJCeVUTnQJBFjZklG5xg__" },
+  { text: null, img: "https://media-hosting.imagekit.io/218648991aa24c6b/WhatsApp%20Image%202025-04-10%20at%2018.00.20_6be5d5a2.jpg?Expires=1838887385&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=AYkLJQuEeEWRgEw-WQiiugxNOc9r8LnN43U5zsenthTghmtI9FEL8iaeHIMdGbIaHVZj2rwc6A9Psy3hiAASzXK40RCp3J8joBhmJTFslVcpzp5sjs-Tq09bOgvN7WbUL~F-DWz5cKz1BuUwjQQzplUzD4nfopx6mcXyyg0TnHZpjmJddo2dC6FfgvGKDcBF~A14zRhkSZpiJhrqFFueGJcIVArH8SQCp38k8VxT29tEFgO2iQzfYKmV6ZtjDOdyGBG4U0mGNlGY~xakHNNZsIppFIEmLxbVEpvrXLXkyUNuFVXOnAyfN1ZleyIxG7Zcld3vOBuXQaE-X-t6Heh2QQ__" },
+  { text: null, img: "https://media-hosting.imagekit.io/918fc62e2ef94975/WhatsApp%20Image%202025-04-10%20at%2018.00.20_5a1e41d7.jpg?Expires=1838887385&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=iU5oKBtmtfwqxHFig2drJqDGoCfeQmLuvMjvN9Z20N3Rgso1dKruOfbWfHacCOuOQ4ijMGUfAW5HQrlGWQlFrJvSMIW31-619c4FgBjdWp8TCnlrz1UVbA7O2Liv0-ddt~mdOT06dwPW-oOVLkj95QBon3gd~r~rUsDqKwlqIMGjI4XdY8Hxtz1U9XRCV2V5uH2cR4x7oMtV0x8Qpb8fqVJpKOoos3F8d1R9ZTaiii8Jn7s0Q-8foyB70hoVjlzuPws6EU5EpdPLrbN~UoJWzWeYeuO19ieBskVPYWy1iNlkwAUtuCkvbmgCc87Rn5riWBTCONNa57oambYC2Hqu2A__" },
+  { text: null, img: "https://media-hosting.imagekit.io/6ad8394826de40f2/WhatsApp%20Image%202025-04-10%20at%2018.00.19_bf0b9e83.jpg?Expires=1838887385&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=V0FjkOXYPCoW29KiyFScvduEMRP2T7i4L2A97kaBv4aoOYL5FeWr~DKQqq~DSZS-1DOZZugeaND1dbQT62YrEdOCw8zrYLKvtvAzIaS~blpRv05PNivGcaBbHppK2cDXxs4kh7cEsEYg7yBTuHAKV069pIxlc~Jg1iIS~9YCBl7sQm233OHtFhTbeBHQ4Uy1niGyv8kKyjCFcUmElFQyrboezerkqOHns9OiWWmamjDtJ55Vk5lIzUQEz9pkfqhbw56Vz6-TqGDbmiGIj8N5LhQ4J5wt~-gxQCPXtjKDEF4Lde9nF6wyeiyxV5K1TDmoKZqMhP4XfZXw7R1BOq2MlQ__" },
+  { text: "I'm really grateful that I'm your friend and I can't tell you how much your words and presence actually mean to me 🌈", img: null },
+  { text: "Life does get tough sometimes but your words are a great reminder that it's ok to feel sad and take breaks when needed and the same goes for you! 💤", img: null },
+  { text: "Your jokes and positivity have always brightened my day even if it's just seeing a notification pop up from you 🌱", img: null },
+  { text: "Don't let one tough experience define you. People mess up all the time, and the important part is learning from it 💗", img: null },
+  { text: "If you ever need someone to listen, hype you up or just chill with, I'm always here kinda (virtually). I'll always have your support sometimes (kidding) 🌸", img: null },
+  { text: "It's ok if things didn't go the way you expected. Sometimes people react in ways we don't fully understand, and that’s on them, not you 💛", img: null },
+  { text: "If it makes you feel any better, just so you know at least Sunghoon is lucky to be born in the same generation as you (I DM'd him) ✨", img: null },
+  { text: "Your strength might waver, but my support never will 💪", img: null },
+  { text: "There will always be people who care about you, don't let overthinking steal your peace 💞🧠", img: null },
+  { text: "Someone out there sees your worth even when you don’t 💭", img: null }
+];
+
+
+    let currentIndex = 0;
 
     function newMsg() {
-      const msg = messages[Math.floor(Math.random() * messages.length)];
-      document.getElementById("encourageBox").innerText = msg;
+      const msg = messages[currentIndex];
+      let messageHTML = "";
+      if (msg.text) {
+        messageHTML = `<p>${msg.text}</p>`;
+      } else if (msg.img) {
+        messageHTML = `<img src="${msg.img}" alt="Encouraging image">`;
+      }
+      document.getElementById("encourageBox").innerHTML = messageHTML;
+
+      // Move to the next message, and loop back to the first one if at the end
+      currentIndex = (currentIndex + 1) % messages.length;
     }
 
     function goHome() {
