@@ -175,54 +175,63 @@
     <p>Click on something to feel the joy you love 💖</p>
   </header>
 
-  <div class="grid">
-    <div class="card" onclick="window.location.href='music.html'; showMessage('Listening to Wave to Earth... 🎧'); scrollToMessage()">
-      <div class="emoji">🎶</div>
-      <h3>Music Vibes</h3>
-    </div>
-
-    <div class="card" onclick="window.location.href='math.html'; showMessage('Math is beautiful 💡📐'); scrollToMessage()">
-      <div class="emoji">➗</div>
-      <h3>Math Magic</h3>
-    </div>
-
-    <div class="card" onclick="window.location.href='family.html'; showMessage('Time with loved ones = best time 🥰'); scrollToMessage()">
-      <div class="emoji">👨‍👩‍👧‍👦</div>
-      <h3>Family & Friends</h3>
-    </div>
-
-    <div class="card" onclick="window.location.href='gifting.html'; showMessage('Giving gifts, making smiles 🎁'); scrollToMessage()">
-      <div class="emoji">🎁</div>
-      <h3>Gifting Joy</h3>
-    </div>
-
-    <div class="card" onclick="window.location.href='map.html'; showMessage('Exploring the world one trip at a time ✈️'); scrollToMessage()">
-      <div class="emoji">🌍</div>
-      <h3>Travel Adventures</h3>
-    </div>
-
-    <div class="card" onclick="window.location.href='animals.html'; showMessage('Penguins & Bears are the cutest 🐧🐻'); scrollToMessage()">
-      <div class="emoji">🐧🐻</div>
-      <h3>Animal Love</h3>
-    </div>
-
-    <!-- Yummy Snacks -->
-    <div class="card milk-tea" onclick="showMessage('Craving milk tea, toast & fish n chips! 🧋🍞🐟'); scrollToMessage()">
-      <div class="emoji">🧋</div>
-      <h3>Yummy Snacks</h3>
-    </div>
-
-    <!-- Pretty Things -->
-    <div class="card" onclick="showMessage('Roses, Carnations, Ribbons & Hugo 🌹🎀'); scrollToMessage()">
-      <div class="emoji">🌸</div>
-      <h3>Pretty Things</h3>
-    </div>
-
-    <div class="card special-card" onclick="window.location.href='encouragement.html'; showEncouragement()">
-      <div class="emoji">🌟</div>
-      <h3>Click for Encouragement!</h3>
-    </div>
+<div class="grid">
+  <div class="card" onclick="window.location.href='music.html'; showMessage('Listening to Wave to Earth... 🎧'); scrollToMessage()">
+    <div class="emoji">🎶</div>
+    <h3>Music Vibes</h3>
   </div>
+
+  <div class="card" onclick="window.location.href='math.html'; showMessage('Math is beautiful 💡📐'); scrollToMessage()">
+    <div class="emoji">➗</div>
+    <h3>Math Magic</h3>
+  </div>
+
+  <div class="card" onclick="window.location.href='family.html'; showMessage('Time with loved ones = best time 🥰'); scrollToMessage()">
+    <div class="emoji">👨‍👩‍👧‍👦</div>
+    <h3>Family & Friends</h3>
+  </div>
+
+  <div class="card" onclick="window.location.href='gifting.html'; showMessage('Giving gifts, making smiles 🎁'); scrollToMessage()">
+    <div class="emoji">🎁</div>
+    <h3>Gifting Joy</h3>
+  </div>
+
+  <div class="card" onclick="window.location.href='map.html'; showMessage('Exploring the world one trip at a time ✈️'); scrollToMessage()">
+    <div class="emoji">🌍</div>
+    <h3>Travel Adventures</h3>
+  </div>
+
+  <div class="card" onclick="window.location.href='animals.html'; showMessage('Penguins & Bears are the cutest 🐧🐻'); scrollToMessage()">
+    <div class="emoji">🐧🐻</div>
+    <h3>Animal Love</h3>
+  </div>
+
+  <!-- Yummy Snacks -->
+  <div class="card milk-tea" onclick="showMessage('Craving milk tea, toast & fish n chips! 🧋🍞🐟'); scrollToMessage()">
+    <div class="emoji">🧋</div>
+    <h3>Yummy Snacks</h3>
+  </div>
+
+  <!-- Pretty Things -->
+  <div class="card" onclick="showMessage('Roses, Carnations, Ribbons & Hugo 🌹🎀'); scrollToMessage()">
+    <div class="emoji">🌸</div>
+    <h3>Pretty Things</h3>
+  </div>
+
+  <!-- Wack a Sunghoon takes encouragement’s spot -->
+  <div class="card" onclick="window.location.href='whack-a-sunghoon.html'; showMessage('Wack a Sunghoon 🔨🧑'); scrollToMessage()">
+    <div class="emoji">🔨</div>
+    <h3>Wack a Sunghoon</h3>
+  </div>
+</div>
+
+<!-- Encouragement moved to bottom center -->
+<div style="display: flex; justify-content: center; margin: 2rem 0;">
+  <div class="card special-card" onclick="window.location.href='encouragement.html'; showEncouragement()">
+    <div class="emoji">🌟</div>
+    <h3>Click for Encouragement!</h3>
+  </div>
+</div>
 
   <div class="message" id="messageBox">✨</div>
 
@@ -268,59 +277,4 @@
       box.style.display = "block";
     }
 
-    // Random Sunghoon popup jumpscare
-    setTimeout(() => {
-      const popup = document.getElementById("sunghoonPopup");
-      popup.style.display = "block";
-      popup.style.opacity = "1";
-      popup.style.transform = "translate(-50%, -50%) scale(1.2)";
-
-      setTimeout(() => {
-        popup.style.transform = "translate(-50%, -50%) scale(0.8)";
-        popup.style.opacity = "0";
-      }, 1500);
-
-      setTimeout(() => {
-        popup.style.display = "none";
-      }, 2000);
-    }, Math.random() * 3000 + 2000); // random time between 5s and 20s
-
-    // Add 10 floating flowers
-    for (let i = 0; i < 10; i++) {
-      const flower = document.createElement('div');
-      flower.classList.add('flower');
-      flower.style.left = Math.random() * 90 + 'vw';
-      flower.style.animationDuration = (6 + Math.random() * 5) + 's';
-      flower.style.top = -50 + 'px';
-      document.body.appendChild(flower);
-
-      flower.addEventListener('mousedown', dragStart);
-      flower.addEventListener('touchstart', dragStart, { passive: false });
-
-      function dragStart(e) {
-        e.preventDefault();
-        let shiftX = (e.clientX || e.touches[0].clientX) - flower.getBoundingClientRect().left;
-        let shiftY = (e.clientY || e.touches[0].clientY) - flower.getBoundingClientRect().top;
-
-        function moveAt(x, y) {
-          flower.style.left = x - shiftX + 'px';
-          flower.style.top = y - shiftY + 'px';
-        }
-
-        function onMouseMove(e) {
-          moveAt(e.clientX || e.touches[0].clientX, e.clientY || e.touches[0].clientY);
-        }
-
-        document.addEventListener('mousemove', onMouseMove);
-        document.addEventListener('touchmove', onMouseMove);
-
-        flower.onmouseup = flower.ontouchend = function() {
-          document.removeEventListener('mousemove', onMouseMove);
-          document.removeEventListener('touchmove', onMouseMove);
-          flower.onmouseup = flower.ontouchend = null;
-        };
-      }
-    }
-  </script>
-</body>
-</html>
+    // R
